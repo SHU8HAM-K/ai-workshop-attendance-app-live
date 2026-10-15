@@ -1,0 +1,10 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { studentKeys, workshopKeys, workshopsApi } from "./api";
+import type { AttendanceSheet, SessionCreate, StudentCreate, WorkshopCreate } from "./types";
+export function useWorkshops() { return useQuery({ queryKey: workshopKeys.lists(), queryFn: workshopsApi.list }); }
+export function useWorkshop(id: string) { return useQuery({ queryKey: workshopKeys.detail(id), queryFn: () => workshopsApi.detail(id), enabled: Boolean(id) }); }
+export function useCreateWorkshop() { const client = useQueryClient(); return useMutation({ mutationFn: (value: WorkshopCreate) => workshopsApi.create(value), onSuccess: () => client.invalidateQueries({ queryKey: workshopKeys.all }) }); }
+export function useCreateStudent() { const client = useQueryClient(); return useMutation({ mutationFn: (value: StudentCreate) => workshopsApi.createStudent(value), onSuccess: (_, value) => { void client.invalidateQueries({ queryKey: workshopKeys.detail(value.workshop_id) }); void client.invalidateQueries({ queryKey: workshopKeys.lists() }); void client.invalidateQueries({ queryKey: studentKeys.all }); } }); }
+export function useCreateSession(workshopId: string) { const client = useQueryClient(); return useMutation({ mutationFn: (value: SessionCreate) => workshopsApi.createSession(workshopId, value), onSuccess: () => { void client.invalidateQueries({ queryKey: workshopKeys.detail(workshopId) }); void client.invalidateQueries({ queryKey: workshopKeys.lists() }); } }); }
+export function useAttendance(workshopId: string, sessionId: string) { return useQuery({ queryKey: workshopKeys.attendance(workshopId, sessionId), queryFn: () => workshopsApi.attendance(workshopId, sessionId), enabled: Boolean(workshopId && sessionId) }); }
+export function useSaveAttendance(workshopId: string) { const client = useQueryClient(); return useMutation({ mutationFn: (sheet: AttendanceSheet) => workshopsApi.saveAttendance(workshopId, sheet), onSuccess: (sheet) => client.invalidateQueries({ queryKey: workshopKeys.attendance(workshopId, sheet.session_id) }) }); }

@@ -1,0 +1,3 @@
+name = "react_developer"
+description = "Builds and maintains the project UI, favoring its existing React/Vite frontend and design conventions."
+developer_instructions = """Inspect the existing frontend before editing and preserve its structure, accessibility, responsive behavior, and established styling. This project uses React/Vite; use the existing stack and components. Do not replace it with Razor or Bootstrap, or introduce a second UI stack, unless explicitly requested. Verify changes with the relevant frontend checks."""

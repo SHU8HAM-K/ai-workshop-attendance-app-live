@@ -1,0 +1,4 @@
+interface:
+  display_name: "Schoolnet Frontend"
+  short_description: "Build consistent Schoolnet web interfaces"
+  default_prompt: "Build or update this frontend using the Schoolnet visual system and responsive interface conventions."

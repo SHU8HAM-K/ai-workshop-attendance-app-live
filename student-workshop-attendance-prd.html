@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Product requirements document for the Schoolnet student workshop attendance system.">
+  <title>Student Workshop Attendance System | PRD</title>
+  <style>
+    :root{--bg:#000;--surface:#0a0a0a;--surface-2:#111;--border:#262626;--border-bright:#3a3a3a;--text:#f2f2f2;--text-dim:#b4b4b4;--text-faint:#8f8f8f;--accent:#fff;--mono:"SF Mono","JetBrains Mono","Fira Code",ui-monospace,Menlo,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}.wrap{max-width:920px;margin:0 auto;padding:72px 28px 120px}
+    header{padding-bottom:54px;border-bottom:1px solid var(--border)}h1{font-size:40px;line-height:1.12;font-weight:600;letter-spacing:-.02em;margin:0 0 22px;background:linear-gradient(180deg,#fff,#9a9a9a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--text-faint);margin-bottom:18px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}.chip{font-family:var(--mono);font-size:12px;color:var(--text-dim);border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 10px}.lede{font-size:20px;line-height:1.6;color:#dadada;border-left:3px solid #666;padding-left:22px;margin:28px 0 0}
+    section{padding:58px 0 10px;scroll-margin-top:28px}h2{font-size:13px;font-family:var(--mono);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint);margin:0 0 28px;padding-bottom:14px;border-bottom:1px solid var(--border)}h2 .num{color:var(--accent)}h3{font-size:20px;font-weight:600;letter-spacing:-.01em;margin:28px 0 12px}p,li,td,figcaption,.wd-body{color:#eaeaea;font-size:17px}p{margin:0 0 18px}ul{margin:10px 0 22px;padding-left:22px}li{margin:8px 0}code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 6px}a{color:var(--text);border-bottom:1px solid var(--border-bright);text-decoration:none}
+    .callout{border:1px solid var(--border-bright);border-left:3px solid #6a6a6a;border-radius:10px;padding:18px 22px;background:var(--surface);margin:24px 0}.callout .tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px}.callout p:last-child{margin-bottom:0}.badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;border:1px solid var(--border-bright);display:inline-block;white-space:nowrap}.b-ok{color:#fff;background:#1c1c1c;border-color:#555}.b-warn{color:#c9c9c9;background:#141414;border-color:#3a3a3a;border-style:dashed}.b-bad{color:#8a8a8a;background:#0d0d0d;border-color:#2a2a2a}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}.card h3{margin:0 0 8px}.card p{margin:0}.metric{font-family:var(--mono);font-size:25px;color:#fff;margin-bottom:5px}.metric-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
+    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:20px 0 28px}table{width:100%;border-collapse:collapse;min-width:700px;background:var(--surface)}th{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);text-align:left;padding:13px 16px;background:var(--surface-2)}td{padding:15px 16px;border-top:1px solid var(--border);vertical-align:top}.req{font-family:var(--mono);font-size:12px;color:var(--text-dim);white-space:nowrap}
+    .toc{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;padding:72px 22px 40px;border-right:1px solid var(--border);background:#000;display:none;z-index:20}.toc-label{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint);margin-bottom:18px}.toc a{display:flex;gap:10px;align-items:baseline;font-size:13px;color:var(--text-dim);text-decoration:none;border:none;padding:7px 0;line-height:1.45;transition:color .15s}.toc a:hover,.toc a.active{color:var(--text)}.toc-num{font-family:var(--mono);font-size:11px;color:var(--text-faint);flex:0 0 auto}.toc a.active .toc-num{color:var(--accent)}
+    .walk{background:radial-gradient(800px 320px at 50% -10%,#141414,transparent 70%),var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px;margin:24px 0}.walk:focus-visible{outline:1px solid #fff;outline-offset:4px}.walk-track{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center}.wnode{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:108px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:14px;color:var(--text-dim);font-family:var(--sans);transition:all .2s;opacity:.55}.wnode:hover{opacity:.85;border-color:var(--border-bright)}.wnode.active{opacity:1;border-color:#6a6a6a;color:var(--text);background:linear-gradient(180deg,#1a1a1a,#0e0e0e);box-shadow:0 12px 44px -22px rgba(255,255,255,.3)}.wnode.done{opacity:.8;border-color:var(--border-bright)}.wn-num{font-family:var(--mono);font-size:12px;font-weight:600;width:24px;height:24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;background:#222;color:var(--text-dim)}.wnode.active .wn-num{background:var(--accent);color:#000}.wn-title{font-size:14px;font-weight:600}.wn-arrow{color:var(--text-faint);font-family:var(--mono)}.walk-detail{margin-top:24px;border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:#000;min-height:118px}.wd-stage{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px}.wd-body{margin:0;line-height:1.7}.walk-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:22px}.wbtn{font-family:var(--mono);font-size:13px;color:var(--text);background:var(--surface-2);border:1px solid var(--border-bright);border-radius:9px;padding:9px 18px;cursor:pointer;transition:all .15s}.wbtn:hover:not(:disabled){background:#1c1c1c;border-color:#5a5a5a}.wbtn:disabled{opacity:.3;cursor:not-allowed}.wcount{font-family:var(--mono);font-size:13px;color:var(--text-dim)}.wcount b{color:var(--text)}
+    figure.diagram{margin:0 0 24px;padding:18px 14px 14px;background:#050505;border:1px solid var(--border);border-radius:14px}figure.diagram svg{width:100%;height:auto;display:block}figure.diagram figcaption{margin-top:14px;padding:0 8px;font-family:var(--mono);font-size:16.5px;color:#eaeaea;line-height:1.6}.diagram [data-step]{opacity:.28;transition:opacity .25s,stroke .25s,fill .25s}.diagram [data-step].lit{opacity:1}.diagram path[data-step].lit{stroke:#fff;stroke-width:1.8}.diagram rect[data-step].lit{stroke:#fff;stroke-width:1.6;fill:#262626}
+    .states{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.state{padding:18px;border-radius:10px;background:var(--surface);text-align:center}.state strong{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.unmarked{border:1px dashed #555}.present{border:2px solid #fff}.absent{border:1px solid #333}.state p{margin:0}
+    footer{margin-top:70px;padding-top:26px;border-top:1px solid var(--border);font-family:var(--mono);font-size:12px;color:var(--text-faint);text-align:center}
+    @media(min-width:1181px){body{padding-left:240px}.toc{display:block}}@media(max-width:680px){.wrap{padding:46px 18px 80px}h1{font-size:30px}.grid,.states{grid-template-columns:1fr}.wn-arrow{display:none}.wnode{min-width:0;flex:1 1 88px}.walk{padding:22px 14px}.walk-nav{gap:10px}.wbtn{padding:9px 12px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wnode,.diagram [data-step]{transition:none}}
+  </style>
+</head>
+<body>
+  <nav class="toc" aria-label="Contents">
+    <div class="toc-label">Contents</div>
+    <a href="#s01" data-toc="s01"><span class="toc-num">01</span> Product vision</a>
+    <a href="#s02" data-toc="s02"><span class="toc-num">02</span> Users and scope</a>
+    <a href="#s03" data-toc="s03"><span class="toc-num">03</span> Product structure</a>
+    <a href="#s04" data-toc="s04"><span class="toc-num">04</span> Attendance workflow</a>
+    <a href="#s05" data-toc="s05"><span class="toc-num">05</span> Requirements</a>
+    <a href="#s06" data-toc="s06"><span class="toc-num">06</span> Analytics and reports</a>
+    <a href="#s07" data-toc="s07"><span class="toc-num">07</span> Quality and data</a>
+    <a href="#s08" data-toc="s08"><span class="toc-num">08</span> Delivery and decisions</a>
+  </nav>
+  <main class="wrap">
+    <header>
+      <div class="eyebrow">Schoolnet / Product Requirements Document</div>
+      <h1>Student Workshop Attendance System</h1>
+      <div class="meta"><span class="chip">Draft v1.0</span><span class="chip">09 October 2026</span><span class="chip">Source: project concept image</span><span class="chip">MVP</span></div>
+      <p class="lede">A simple admin-led system for recording student attendance in workshops, organizing records by calendar date, measuring time spent, and turning attendance data into useful analytics and reports.</p>
+      <div class="callout"><div class="tag">Grounded scope</div><p>This PRD uses the seven capabilities shown in the shared concept image: admin student management, attendance status, calendar, student list, time spent, analytics graphs, and reporting. Details not shown in the image are marked as decisions to confirm.</p></div>
+    </header>
+
+    <section id="s01">
+      <h2><span class="num">01</span> Product vision</h2>
+      <h3>Problem statement</h3>
+      <p>Workshop teams need one reliable place to know which students joined, whether their attendance has been marked, how long they participated, and what the attendance pattern looks like over time. Manual lists and spreadsheets make daily marking, review, and reporting slow and error prone.</p>
+      <h3>Product goal</h3>
+      <p>Give an authorized administrator a fast attendance workspace that connects each student to a workshop date, a clear status, a participation duration, and an exportable record.</p>
+      <div class="grid">
+        <div class="card"><div class="metric">1 place</div><div class="metric-label">Student and attendance management</div></div>
+        <div class="card"><div class="metric">3 states</div><div class="metric-label">Unmarked, Present, Absent</div></div>
+        <div class="card"><div class="metric">Calendar</div><div class="metric-label">Date-based attendance history</div></div>
+        <div class="card"><div class="metric">Reports</div><div class="metric-label">Actionable attendance summaries</div></div>
+      </div>
+      <h3>MVP success</h3>
+      <ul><li>An admin can create and maintain the workshop student list without editing a spreadsheet.</li><li>An admin can complete daily attendance and immediately see how many students are Present, Absent, or still Unmarked.</li><li>Time spent and historical attendance are visible per student.</li><li>Analytics totals match the underlying student records and reports.</li></ul>
+    </section>
+
+    <section id="s02">
+      <h2><span class="num">02</span> Users and scope</h2>
+      <div class="table-wrap"><table><thead><tr><th>User</th><th>Main need</th><th>MVP permissions</th></tr></thead><tbody>
+        <tr><td>Administrator</td><td>Maintain students, mark attendance, review the calendar, and create reports.</td><td>Add, edit, remove, mark, review, export.</td></tr>
+        <tr><td>Workshop coordinator</td><td>Understand daily participation and overall attendance performance.</td><td>View dashboards and reports. Edit permission is a policy decision.</td></tr>
+        <tr><td>Student</td><td>Attend the workshop and have participation recorded accurately.</td><td>No portal access is required by the concept image.</td></tr>
+      </tbody></table></div>
+      <h3>Included in MVP</h3>
+      <ul><li>Secure admin portal.</li><li>Student list with add, edit, search, and remove actions.</li><li>Workshop calendar with daily attendance status.</li><li>Unmarked, Present, and Absent states.</li><li>Time spent per student and per session date.</li><li>Attendance analytics graphs.</li><li>Downloadable and printable reports.</li></ul>
+      <h3>Outside the confirmed scope</h3>
+      <p>Student self check-in, QR codes, biometrics, notifications, certificates, payments, and learning content are not shown in the concept image. They should not enter the MVP unless the project owner adds them.</p>
+    </section>
+
+    <section id="s03">
+      <h2><span class="num">03</span> Product structure</h2>
+      <div class="walk" data-walk>
+        <figure class="diagram">
+          <svg viewBox="0 0 760 285" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Admin portal and its attendance modules">
+            <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#8f8f8f"/></marker></defs>
+            <g font-family="SF Mono,monospace" font-size="12" fill="#eaeaea">
+              <rect data-step="0" x="18" y="116" width="120" height="48" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="78" y="145" text-anchor="middle">administrator</text>
+              <rect data-step="1" x="220" y="116" width="120" height="48" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="280" y="145" text-anchor="middle">admin portal</text>
+              <rect data-step="2" x="430" y="20" width="132" height="44" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="496" y="47" text-anchor="middle">student list</text>
+              <rect data-step="3" x="430" y="84" width="132" height="44" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="496" y="111" text-anchor="middle">calendar</text>
+              <rect data-step="4" x="430" y="148" width="132" height="44" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="496" y="175" text-anchor="middle">attendance</text>
+              <rect data-step="5" x="430" y="212" width="132" height="44" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="496" y="239" text-anchor="middle">analytics</text>
+              <rect data-step="6" x="632" y="116" width="110" height="48" rx="8" fill="#1c1c1c" stroke="#3a3a3a"/><text x="687" y="145" text-anchor="middle">reporting</text>
+            </g>
+            <g fill="none" stroke="#666" stroke-width="1.4" marker-end="url(#a1)"><path data-step="0" d="M138 140h76"/><path data-step="1" d="M340 134c40-12 48-80 84-89"/><path data-step="2" d="M340 138c38-8 48-27 84-30"/><path data-step="3" d="M340 142c38 8 48 27 84 30"/><path data-step="4" d="M340 146c38 18 46 78 84 87"/><path data-step="5" d="M562 234c58 0 48-70 64-84"/><path data-step="6" d="M632 130c-58-28-240-42-286 0"/></g>
+          </svg>
+          <figcaption>The admin portal connects student management, the workshop calendar, attendance records, time-based analytics, and reporting in one workspace.</figcaption>
+        </figure>
+        <div class="walk-track">
+          <button class="wnode" data-i="0"><span class="wn-num">1</span><span class="wn-title">Sign in</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="1"><span class="wn-num">2</span><span class="wn-title">Portal</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="2"><span class="wn-num">3</span><span class="wn-title">Students</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="3"><span class="wn-num">4</span><span class="wn-title">Calendar</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="4"><span class="wn-num">5</span><span class="wn-title">Attendance</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="5"><span class="wn-num">6</span><span class="wn-title">Analytics</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="6"><span class="wn-num">7</span><span class="wn-title">Reports</span></button>
+        </div>
+        <div class="walk-detail">
+          <div class="wd-stage" data-detail="0">Step 1 · Sign in</div><p class="wd-body" data-detail="0">An authorized administrator enters the protected workspace.</p>
+          <div class="wd-stage" data-detail="1" hidden>Step 2 · Portal</div><p class="wd-body" data-detail="1" hidden>The home dashboard summarizes today's attendance and highlights records that are still Unmarked.</p>
+          <div class="wd-stage" data-detail="2" hidden>Step 3 · Students</div><p class="wd-body" data-detail="2" hidden>The admin adds, edits, searches, or removes students from the workshop list.</p>
+          <div class="wd-stage" data-detail="3" hidden>Step 4 · Calendar</div><p class="wd-body" data-detail="3" hidden>The admin chooses a workshop date and sees its attendance completion status.</p>
+          <div class="wd-stage" data-detail="4" hidden>Step 5 · Attendance</div><p class="wd-body" data-detail="4" hidden>Each student receives one status for the selected date, plus participation times when available.</p>
+          <div class="wd-stage" data-detail="5" hidden>Step 6 · Analytics</div><p class="wd-body" data-detail="5" hidden>Graphs summarize attendance rate, status distribution, trends, and time spent.</p>
+          <div class="wd-stage" data-detail="6" hidden>Step 7 · Reports</div><p class="wd-body" data-detail="6" hidden>The admin filters a date range and produces a downloadable or printable attendance report.</p>
+        </div>
+        <div class="walk-nav"><button class="wbtn wprev">← Back</button><span class="wcount"><b>1</b> / 7</span><button class="wbtn wnext">Next →</button></div>
+      </div>
+    </section>
+
+    <section id="s04">
+      <h2><span class="num">04</span> Attendance workflow</h2>
+      <div class="states"><div class="state unmarked"><strong>Unmarked</strong><p>Default state. The admin has not yet made a decision.</p></div><div class="state present"><strong>Present</strong><p>The student attended on the selected workshop date.</p></div><div class="state absent"><strong>Absent</strong><p>The student did not attend on the selected workshop date.</p></div></div>
+      <div class="walk" data-walk>
+        <div class="walk-track"><button class="wnode" data-i="0"><span class="wn-num">1</span><span class="wn-title">Choose date</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="1"><span class="wn-num">2</span><span class="wn-title">Load list</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="2"><span class="wn-num">3</span><span class="wn-title">Mark</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="3"><span class="wn-num">4</span><span class="wn-title">Add time</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="4"><span class="wn-num">5</span><span class="wn-title">Review</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="5"><span class="wn-num">6</span><span class="wn-title">Save</span></button></div>
+        <div class="walk-detail">
+          <div class="wd-stage" data-detail="0">Step 1 · Choose date</div><p class="wd-body" data-detail="0">The admin selects the workshop date from the calendar.</p>
+          <div class="wd-stage" data-detail="1" hidden>Step 2 · Load list</div><p class="wd-body" data-detail="1" hidden>The system shows all active students. New daily records start as Unmarked.</p>
+          <div class="wd-stage" data-detail="2" hidden>Step 3 · Mark</div><p class="wd-body" data-detail="2" hidden>The admin marks each student Present or Absent. Bulk marking may speed up large workshops while preserving individual editing.</p>
+          <div class="wd-stage" data-detail="3" hidden>Step 4 · Add time</div><p class="wd-body" data-detail="3" hidden>For Present students, the admin records start and end time or a total duration. The exact method is a product decision.</p>
+          <div class="wd-stage" data-detail="4" hidden>Step 5 · Review</div><p class="wd-body" data-detail="4" hidden>A completion summary shows totals and lists any students who remain Unmarked or have invalid times.</p>
+          <div class="wd-stage" data-detail="5" hidden>Step 6 · Save</div><p class="wd-body" data-detail="5" hidden>The date record is saved, the calendar indicator updates, and analytics recalculate from the stored records.</p>
+        </div>
+        <div class="walk-nav"><button class="wbtn wprev">← Back</button><span class="wcount"><b>1</b> / 6</span><button class="wbtn wnext">Next →</button></div>
+      </div>
+      <div class="callout"><div class="tag">Required rule</div><p>Unmarked must remain different from Absent. The system must never convert an incomplete admin action into an absence without a visible confirmation.</p></div>
+    </section>
+
+    <section id="s05">
+      <h2><span class="num">05</span> Functional requirements</h2>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Acceptance summary</th></tr></thead><tbody>
+        <tr><td class="req">FR-01</td><td>Admin authentication and protected portal access.</td><td><span class="badge b-ok">Must</span></td><td>Unauthenticated users cannot access student or attendance data.</td></tr>
+        <tr><td class="req">FR-02</td><td>Add a student with required identity fields and workshop association.</td><td><span class="badge b-ok">Must</span></td><td>A valid student appears immediately in the active list.</td></tr>
+        <tr><td class="req">FR-03</td><td>Edit, search, filter, and remove a student.</td><td><span class="badge b-ok">Must</span></td><td>Removal requires confirmation and does not erase historical attendance.</td></tr>
+        <tr><td class="req">FR-04</td><td>Show workshop dates in a calendar with completion indicators.</td><td><span class="badge b-ok">Must</span></td><td>Each date shows complete, incomplete, or no record.</td></tr>
+        <tr><td class="req">FR-05</td><td>Assign Unmarked, Present, or Absent for each active student and date.</td><td><span class="badge b-ok">Must</span></td><td>Only one current status exists per student per date.</td></tr>
+        <tr><td class="req">FR-06</td><td>Capture workshop time spent for Present students.</td><td><span class="badge b-ok">Must</span></td><td>Duration cannot be negative and is derived consistently from accepted inputs.</td></tr>
+        <tr><td class="req">FR-07</td><td>Show daily totals and per-student attendance history.</td><td><span class="badge b-ok">Must</span></td><td>Totals always reconcile to the displayed records.</td></tr>
+        <tr><td class="req">FR-08</td><td>Display analytics graphs for status and participation trends.</td><td><span class="badge b-ok">Must</span></td><td>Charts respond to workshop and date filters.</td></tr>
+        <tr><td class="req">FR-09</td><td>Generate downloadable attendance reports.</td><td><span class="badge b-ok">Must</span></td><td>Report includes filter context, student status, time spent, and totals.</td></tr>
+        <tr><td class="req">FR-10</td><td>Record who changed attendance and when.</td><td><span class="badge b-warn">Should</span></td><td>History identifies actor, previous value, new value, and timestamp.</td></tr>
+      </tbody></table></div>
+      <h3>Student record</h3>
+      <p>Minimum proposed fields are student ID, full name, class or group, contact or registration reference, workshop, active status, and created date. Exact required fields must match the Schoolnet source data.</p>
+      <h3>Attendance record</h3>
+      <p>Minimum proposed fields are student ID, workshop date, status, start time, end time, calculated duration, notes, marked by, and last updated time.</p>
+    </section>
+
+    <section id="s06">
+      <h2><span class="num">06</span> Analytics and reporting</h2>
+      <div class="table-wrap"><table><thead><tr><th>View</th><th>Question answered</th><th>Recommended display</th></tr></thead><tbody>
+        <tr><td>Daily status</td><td>How many students are Present, Absent, or Unmarked today?</td><td>Summary cards plus distribution graph.</td></tr>
+        <tr><td>Attendance trend</td><td>Is attendance improving or declining across workshop dates?</td><td>Date-based line or column graph.</td></tr>
+        <tr><td>Student history</td><td>How consistently did one student attend?</td><td>Calendar history and attendance percentage.</td></tr>
+        <tr><td>Time spent</td><td>How long did students participate?</td><td>Average duration and per-student comparison.</td></tr>
+        <tr><td>Completion quality</td><td>Are any records still incomplete?</td><td>Unmarked count and missing-time exceptions.</td></tr>
+      </tbody></table></div>
+      <h3>Report generation</h3>
+      <div class="walk" data-walk>
+        <div class="walk-track"><button class="wnode" data-i="0"><span class="wn-num">1</span><span class="wn-title">Select</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="1"><span class="wn-num">2</span><span class="wn-title">Filter</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="2"><span class="wn-num">3</span><span class="wn-title">Preview</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="3"><span class="wn-num">4</span><span class="wn-title">Validate</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="4"><span class="wn-num">5</span><span class="wn-title">Export</span></button></div>
+        <div class="walk-detail">
+          <div class="wd-stage" data-detail="0">Step 1 · Select</div><p class="wd-body" data-detail="0">The admin selects the workshop or student report type.</p>
+          <div class="wd-stage" data-detail="1" hidden>Step 2 · Filter</div><p class="wd-body" data-detail="1" hidden>The admin chooses a date range, student group, and attendance state.</p>
+          <div class="wd-stage" data-detail="2" hidden>Step 3 · Preview</div><p class="wd-body" data-detail="2" hidden>The system displays matching rows, totals, attendance percentage, and time spent.</p>
+          <div class="wd-stage" data-detail="3" hidden>Step 4 · Validate</div><p class="wd-body" data-detail="3" hidden>The report warns about Unmarked records or missing participation time before download.</p>
+          <div class="wd-stage" data-detail="4" hidden>Step 5 · Export</div><p class="wd-body" data-detail="4" hidden>The admin downloads CSV or a print-ready report using the same values shown in the preview.</p>
+        </div>
+        <div class="walk-nav"><button class="wbtn wprev">← Back</button><span class="wcount"><b>1</b> / 5</span><button class="wbtn wnext">Next →</button></div>
+      </div>
+    </section>
+
+    <section id="s07">
+      <h2><span class="num">07</span> Quality and data rules</h2>
+      <div class="table-wrap"><table><thead><tr><th>Area</th><th>Requirement</th></tr></thead><tbody>
+        <tr><td>Accuracy</td><td>One attendance record per student per workshop date. Dashboard, calendar, graphs, and reports use the same canonical record.</td></tr>
+        <tr><td>Usability</td><td>An admin can mark a typical day's attendance without navigating away from the student list.</td></tr>
+        <tr><td>Performance</td><td>Student lists and calendar views should become usable within 3 seconds on the target Schoolnet network.</td></tr>
+        <tr><td>Accessibility</td><td>All actions support keyboard use, visible focus, text labels, and status cues that do not rely only on color.</td></tr>
+        <tr><td>Security</td><td>Protected access, role checks, encrypted transport, safe session handling, and audit logging for sensitive changes.</td></tr>
+        <tr><td>Privacy</td><td>Collect only required student information and define access, retention, export, and deletion policies before launch.</td></tr>
+        <tr><td>Recovery</td><td>Accidental student removal must not delete historical attendance. Corrections must be traceable.</td></tr>
+      </tbody></table></div>
+      <div class="callout"><div class="tag">Data invariant</div><p><code>time_spent = end_time - start_time</code> when time boundaries are used. Absent and Unmarked records must not carry participation duration.</p></div>
+    </section>
+
+    <section id="s08">
+      <h2><span class="num">08</span> Delivery and decisions</h2>
+      <h3>Suggested MVP delivery order</h3>
+      <div class="walk" data-walk>
+        <div class="walk-track"><button class="wnode" data-i="0"><span class="wn-num">1</span><span class="wn-title">Foundation</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="1"><span class="wn-num">2</span><span class="wn-title">Students</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="2"><span class="wn-num">3</span><span class="wn-title">Attendance</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="3"><span class="wn-num">4</span><span class="wn-title">Insights</span></button><span class="wn-arrow">→</span><button class="wnode" data-i="4"><span class="wn-num">5</span><span class="wn-title">Pilot</span></button></div>
+        <div class="walk-detail">
+          <div class="wd-stage" data-detail="0">Phase 1 · Foundation</div><p class="wd-body" data-detail="0">Confirm data fields, roles, workshop date model, and time-spent method, then implement admin authentication and the base data model.</p>
+          <div class="wd-stage" data-detail="1" hidden>Phase 2 · Students</div><p class="wd-body" data-detail="1" hidden>Build the student list with add, edit, search, filter, and safe removal.</p>
+          <div class="wd-stage" data-detail="2" hidden>Phase 3 · Attendance</div><p class="wd-body" data-detail="2" hidden>Build the calendar, daily marking interface, three-state model, time spent, validation, and correction history.</p>
+          <div class="wd-stage" data-detail="3" hidden>Phase 4 · Insights</div><p class="wd-body" data-detail="3" hidden>Add dashboard totals, graphs, student history, filtered reports, and export.</p>
+          <div class="wd-stage" data-detail="4" hidden>Phase 5 · Pilot</div><p class="wd-body" data-detail="4" hidden>Run one real workshop day, compare the results with a manual backup, and resolve usability or accuracy problems before wider use.</p>
+        </div>
+        <div class="walk-nav"><button class="wbtn wprev">← Back</button><span class="wcount"><b>1</b> / 5</span><button class="wbtn wnext">Next →</button></div>
+      </div>
+      <h3>Decisions to confirm</h3>
+      <ul><li>Which fields uniquely identify a student?</li><li>Does one project contain one workshop or several workshops?</li><li>Are workshop dates created in advance or generated from a schedule?</li><li>Is time spent entered manually, captured from check-in and check-out, or calculated another way?</li><li>Can coordinators edit attendance, or is editing restricted to administrators?</li><li>Which report formats are required: CSV, PDF, print, or all three?</li><li>How long should student and attendance records be retained?</li></ul>
+      <div class="callout"><div class="tag">MVP launch gate</div><p>The product is ready for pilot when an admin can manage students, complete one date's attendance, record valid participation time, review analytics, and export a report whose totals match the attendance list.</p></div>
+    </section>
+    <footer>student-workshop-attendance-prd.html · standalone OLED monochrome document</footer>
+  </main>
+  <script>
+    document.querySelectorAll('[data-walk]').forEach(function(walk){
+      var nodes=walk.querySelectorAll('.wnode'),details=walk.querySelectorAll('[data-detail]'),calls=walk.querySelectorAll('.diagram [data-step]'),prev=walk.querySelector('.wprev'),next=walk.querySelector('.wnext'),count=walk.querySelector('.wcount b'),total=nodes.length,i=0;
+      function render(){nodes.forEach(function(n,idx){n.classList.toggle('active',idx===i);n.classList.toggle('done',idx<i)});details.forEach(function(d){d.hidden=(+d.dataset.detail!==i)});calls.forEach(function(c){c.classList.toggle('lit',+c.dataset.step===i)});count.textContent=i+1;prev.disabled=i===0;next.disabled=i===total-1}
+      next.addEventListener('click',function(){if(i<total-1){i++;render()}});prev.addEventListener('click',function(){if(i>0){i--;render()}});nodes.forEach(function(n){n.addEventListener('click',function(){i=+n.dataset.i;render()})});walk.tabIndex=0;walk.addEventListener('keydown',function(e){if(e.key==='ArrowRight'&&i<total-1){i++;render()}if(e.key==='ArrowLeft'&&i>0){i--;render()}});render();
+    });
+    (function(){var links={};document.querySelectorAll('.toc a[data-toc]').forEach(function(a){links[a.dataset.toc]=a});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].classList.remove('active')});if(links[e.target.id])links[e.target.id].classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s)})})();
+  </script>
+</body>
+</html>
